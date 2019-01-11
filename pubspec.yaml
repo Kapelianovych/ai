@@ -1,0 +1,16 @@
+name: ai
+description: Library that help construct neural networks.
+version: 0.1.0
+homepage: https://github.com/YevhenKap/ai
+author: Kapelianovych Yevhen <kapelianovych.y.v@gmail.com>
+license: MIT
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  extended_math: ^0.0.13
+  meta: ^1.1.7
+
+dev_dependencies:
+  test: ^1.5.1
