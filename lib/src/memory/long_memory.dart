@@ -2,18 +2,22 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../utils/system.dart';
+import 'base/memory_base.dart';
 
 /// Class that retain network's data
-class LongMemory {
+class LongMemory extends MemoryBase {
   /// Gets instance of [LongMemory] as singleton
   factory LongMemory() => _longMemory;
+
   /// Creates [LongMemory] instance
   LongMemory._init();
 
   /// Holds instance of [LongMemory]
   static final LongMemory _longMemory = LongMemory._init();
+
   /// Data that will be retained
   final Map<String, List<List<double>>> _data = <String, List<List<double>>>{};
+
   /// File [_data] to be written in
   final File _file = createFile('resources/knowledge.json');
 
@@ -22,11 +26,11 @@ class LongMemory {
     _data['$layerNumber'] = data;
   }
 
-  /// Saves network's data
-  void retain() => _file.writeAsStringSync(jsonEncode(_data));
+  @override
+  void memorize() => _file.writeAsStringSync(jsonEncode(_data));
 
   /// Returns newtwork's data from file
-  /// 
+  ///
   /// If file doesn't exist returns `null`.
   Map<String, Object> remember() {
     if (_file.existsSync()) {
@@ -36,7 +40,7 @@ class LongMemory {
     return null;
   }
 
-  /// Delete network's data
+  @override
   void forget() {
     _data.clear();
     if (_file.existsSync()) {

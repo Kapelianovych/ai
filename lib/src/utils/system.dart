@@ -1,7 +1,7 @@
 import 'dart:io';
 
 /// Creates file according to the [path]
-/// 
+///
 /// Creates directories if they aren't exists.
 /// [path] may be absolute or relative.
 File createFile(String path) {
@@ -16,7 +16,8 @@ File createFile(String path) {
         Directory(checkedPath.toString()).createSync();
       }
     }
-    checkedPath.write('${endDir.isAbsolute ? '/' : ''}${parts[parts.length - 1]}');
+    checkedPath
+        .write('${endDir.isAbsolute ? '/' : ''}${parts[parts.length - 1]}');
   }
 
   return File(checkedPath.toString());

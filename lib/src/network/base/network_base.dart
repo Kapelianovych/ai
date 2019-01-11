@@ -6,6 +6,7 @@ import '../../neuron/base/neuron_base.dart';
 abstract class NetworkBase {
   /// Create `network` with given [layers]
   NetworkBase(this.layers);
+
   /// Creates empty neural network
   NetworkBase.empty();
 
@@ -13,7 +14,7 @@ abstract class NetworkBase {
   List<Layer<NeuronBase>> layers;
 
   /// Gets layer at specified [position]
-  /// 
+  ///
   /// [position] should be in range from 1 to end inclusively.
   Layer<NeuronBase> layerAt(int position) => layers[position - 1];
 

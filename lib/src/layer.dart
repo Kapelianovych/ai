@@ -8,6 +8,7 @@ import 'neuron/neuron.dart';
 class Layer<T extends NeuronBase> {
   /// Create [Layer] with given [neurons]
   Layer(this.neurons);
+
   /// Creates empty layer
   Layer.empty();
 
@@ -15,21 +16,23 @@ class Layer<T extends NeuronBase> {
   List<T> neurons;
 
   /// Inserts [neuron] in this layer
-  /// 
+  ///
   /// Inserts [neuron] in [position] if it is specified,
   /// otherwise add [neuron] to end of this layer.
   /// [position] is in range from 1 to end inclusively.
   void insert(T neuron, {int position}) {
-    position != null ? neurons.insert(position - 1, neuron) : neurons.add(neuron);
+    position != null
+        ? neurons.insert(position - 1, neuron)
+        : neurons.add(neuron);
   }
 
   /// Removes neuron at specified [position]
-  /// 
+  ///
   /// [position] is in range from 1 to end inclusively.
   T removeAt(int position) => neurons.removeAt(position - 1);
 
   /// Gets neuron at specified [position]
-  /// 
+  ///
   /// [position] should be in range from 1 to end inclusively.
   T neuronAt(int position) => neurons[position - 1];
 
@@ -39,7 +42,8 @@ class Layer<T extends NeuronBase> {
 
     for (var i = 1; i <= neurons.length; i++) {
       if (weights != null && weights.isNotEmpty) {
-        final convertedWeights = weights[i - 1].map((v) => double.parse(v.toString())).toList();
+        final convertedWeights =
+            weights[i - 1].map((v) => double.parse(v.toString())).toList();
         neuronAt(i).weights.setAll(0, convertedWeights);
       }
       out.add(neuronAt(i).out);
@@ -49,7 +53,7 @@ class Layer<T extends NeuronBase> {
   }
 
   /// Accept [input] and pass it to [neurons]
-  /// 
+  ///
   /// If [inputLayer] is true, values of [input] are set to corresponding neurons,
   /// otherwise all neurons gets the same whole [input].
   void accept(List<double> input, {bool inputLayer = false}) {

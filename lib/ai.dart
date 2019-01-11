@@ -29,5 +29,3 @@ export 'src/network/multilayer_perceptron.dart';
 export 'src/neuron/base/neuron_base.dart';
 export 'src/neuron/input_neuron.dart';
 export 'src/neuron/neuron.dart';
-
-
