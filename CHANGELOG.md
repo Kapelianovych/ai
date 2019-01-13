@@ -1,4 +1,8 @@
-# 0.1.1
+# 0.1.2
+
+- Fix `expected` parameter of `train()` method of `MuslilayerPerceptron` to accept list of expected output.
+
+## 0.1.1
 
 - Add `MemoryBase` class.
 - Add description to package.

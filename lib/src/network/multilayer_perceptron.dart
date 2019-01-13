@@ -30,12 +30,12 @@ class MultilayerPerceptron extends NetworkBase {
   /// Train this perseptron
   void train(
       {@required List<List<double>> input,
-      @required List<double> expected,
+      @required List<List<double>> expected,
       @required double learningRate,
       @required int epoch}) {
     for (var i = 0; i < epoch; i++) {
       for (var j = 0; j < input.length; j++) {
-        _backPropagation(input[j], <double>[expected[j]], learningRate);
+        _backPropagation(input[j], expected[j], learningRate);
       }
     }
 
