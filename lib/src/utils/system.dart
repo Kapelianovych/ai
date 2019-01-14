@@ -16,9 +16,7 @@ File createFile(String path) {
         Directory(checkedPath.toString()).createSync();
       }
     }
-    checkedPath
-        .write('${endDir.isAbsolute ? '/' : ''}${parts[parts.length - 1]}');
   }
 
-  return File(checkedPath.toString());
+  return File(path);
 }

@@ -1,4 +1,9 @@
-# 0.1.2
+# 0.1.3
+
+- Fix internal `createFile()` method for `...Memory` class.
+- Change docs in `ShortMemory` class.
+
+## 0.1.2
 
 - Fix `expected` parameter of `train()` method of `MuslilayerPerceptron` to accept list of expected output.
 

@@ -12,8 +12,9 @@ class ShortMemory extends MemoryBase {
   /// Holds short memory instance
   static final ShortMemory _shortMemory = ShortMemory._init();
 
-  /// Holds any numbers
+  /// Holds any numbers (current layer)
   num number;
+  /// Store temporary weights of layer.
   List<List<double>> _list;
 
   /// Gets copy of [_list]
