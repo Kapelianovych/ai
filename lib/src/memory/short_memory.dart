@@ -14,6 +14,7 @@ class ShortMemory extends MemoryBase {
 
   /// Holds any numbers (current layer)
   num number;
+
   /// Store temporary weights of layer.
   List<List<double>> _list;
 

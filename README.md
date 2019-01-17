@@ -7,7 +7,7 @@ Created under a MIT-style
 
 This library represent an simple way to create neural network.
 Currently **multilayer** and **single-layer** perceptron can be created.
-In learning used __backpropagation__ algorithm for both of them.
+In learning is used __backpropagation__ algorithm for both of them.
 
 ### API
 
