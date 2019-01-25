@@ -1,4 +1,14 @@
-# 0.1.4
+# 0.1.5
+
+- Remove `NetworkBase` class.
+- Add `Structure`, `MlpStructure` entities.
+- Rename `MultilayerPerceptron` to `MLP`.
+- Add `MLP.fromStructure()` constructor and create `MLP.withLayers()` constructor.
+- Fix `train()` method of `MLP` class.
+- Implroved README.
+- Fix bug in example.
+
+## 0.1.4
 
 - Downgrade required Dart SDK to `2.1.0-dev.9.4`.
 

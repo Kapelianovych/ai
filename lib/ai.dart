@@ -23,8 +23,7 @@ export 'src/layer.dart';
 export 'src/memory/long_memory.dart';
 export 'src/memory/short_memory.dart';
 
-export 'src/network/base/network_base.dart';
-export 'src/network/multilayer_perceptron.dart';
+export 'src/network/mlp.dart';
 
 export 'src/neuron/base/neuron_base.dart';
 export 'src/neuron/input_neuron.dart';

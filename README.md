@@ -6,25 +6,47 @@ Created under a MIT-style
 ## Overview
 
 This library represent an simple way to create neural network.
-Currently **multilayer** and **single-layer** perceptron can be created.
-In learning is used __backpropagation__ algorithm for both of them.
+
+There are 1 type of neural network that can be created:
+
+- **MLP**(multilayer and single-layer perceptron).
 
 ### API
 
+#### MLP
+
 Perseptron is designed due to Rosenblatt's perseptron.
 
-The main class is the `MultilayerPerseptron` which can contains `Layers`.
+The main class is the `MLP` which can contains `Layers`.
 Each layer consist of one or many `Neuron`s.
 First layer always consist of `InputNeuron`s where each of them take one input value and have weight equal to 1.
 All neurons of previous layer have contacts with each neurons of next layer.
+
+In learning is used __backpropagation__ algorithm.
 
 #### Memory
 
 Neural network have long-time and short-time memory.
 All information (knowledge - weights of synapces) of neural network during studying pass through short-time memory.
 When studying finished and knowledge is structured, then it pass to long-time memory.
-Knowledge is saved in JSON file `knowledge.json` in `resources` directory.
+Knowledge is saved in JSON file `knowledge.json` in `resources` directory in the root of your library.
 For next time network take knowledge from file and initialize with proper weights.
+
+#### Structure
+
+Neural network can be created from predefined structure difined in `structure.json` file. You can place it anywhere you want, but default and preffered way is placing it in `resources` directory in the root of your library.
+Every `structure.json` must have `type` property that corresspond to neural network's names.
+
+Structure of *MLP*:
+
+```json
+{
+  "type": "MLP",
+  "input": 15, // count of `InputNeuron`s
+  "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer
+  "output": 3 // count of output `Neuron`s
+}
+```
 
 ## Sample
 
@@ -63,15 +85,27 @@ void main() {
   final l3 = Layer<Neuron>(<Neuron>[
     Neuron(5)
   ]);
-  final n = MultilayerPerceptron(<Layer<NeuronBase>>[
+  final n = MLP.withLayers(<Layer<NeuronBase>>[
     l1,
     l2,
     l3
   ]);
 
-  final expected = <double>[0.01, 0.01, 0.01, 0.01, 0.01, 0.99, 0.01, 0.01, 0.01, 0.01];
+  // Expected results according to learning data (10)
+  final expected = <List<double>>[
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.99], // 5
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.01],
+    <double>[0.01]
+  ];
 
-  // Learning data
+  // Learning data (10)
   final trainInput = <List<double>>[
     '111101101101111'.split('').map(double.parse).toList(),
     '001001001001001'.split('').map(double.parse).toList(),
@@ -109,6 +143,7 @@ void main() {
   print('Аnd 0? - ${n.predict(trainInput[0])}');
   print('Аnd 8? - ${n.predict(trainInput[8])}');
   print('Аnd 3? - ${n.predict(trainInput[3])}');
+}
 ```
 
 ## Features and bugs
