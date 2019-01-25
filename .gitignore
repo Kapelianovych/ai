@@ -1,5 +1,6 @@
 # Locals files and diretories
 .DS_Store
+resources/
 
 # Files and directories created by pub
 .dart_tool/
