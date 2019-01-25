@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../constants/constants.dart';
 import '../utils/system.dart';
 import 'base/memory_base.dart';
 
@@ -19,7 +20,7 @@ class LongMemory extends MemoryBase {
   final Map<String, List<List<double>>> _data = <String, List<List<double>>>{};
 
   /// File [_data] to be written in
-  final File _file = createFile('resources/knowledge.json');
+  final File _file = createFile(knowledgePath);
 
   /// Add [data] to memory corresponding to layer
   void accept(int layerNumber, List<List<double>> data) {
