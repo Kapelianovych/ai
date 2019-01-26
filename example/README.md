@@ -1,3 +1,8 @@
+# Examples
+
+## MLP
+
+```dart
 import 'package:ai/ai.dart';
 
 void main() {
@@ -28,7 +33,7 @@ void main() {
   final l3 = Layer<Neuron>(<Neuron>[
     Neuron(5)
   ]);
-  final n = MLP.withLayers(<Layer<NeuronBase>>[
+  final n = MLP(<Layer<NeuronBase>>[
     l1,
     l2,
     l3
@@ -87,3 +92,21 @@ void main() {
   print('Аnd 8? - ${n.predict(trainInput[8])}');
   print('Аnd 3? - ${n.predict(trainInput[3])}');
 }
+```
+
+## AE
+
+```dart
+import 'package:ai/ai.dart';
+
+void main(List<String> args) {
+  final ae = AE.fromStructure();
+
+  final trainInput = <List<double>>[
+    '111100111001111'.split('').map(double.parse).toList(), // 5
+  ];
+
+  ae.train(input: trainInput, learningRate: 0.14, epoch: 5000);
+  print(ae.encode(trainInput[0]));
+}
+```

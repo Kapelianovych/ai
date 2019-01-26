@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../constants/constants.dart';
+import 'ae_structure.dart';
 import 'mlp_structure.dart';
 
 /// Class that represent `structure.json` file
@@ -34,6 +35,11 @@ class Structure {
   /// If [type] isn't `MLP` returns `null`.
   MlpStructure forMLP() =>
       type == 'MLP' ? MlpStructure.fromJson(structure) : null;
+
+  /// Gets structure for MLP
+  ///
+  /// If [type] isn't `AE` returns `null`.
+  AeStructure forAE() => type == 'AE' ? AeStructure.fromJson(structure) : null;
 
   @override
   String toString() => 'Structure for $type';

@@ -1,4 +1,12 @@
-# 0.1.5
+# 0.1.6
+
+- Change `MLP.withLayers()` constructor to `MLP()`.
+- Add `Layer.construct` constructor.
+- Add `AE` neural network.
+- Edit README.
+- Change examples.
+
+## 0.1.5
 
 - Remove `NetworkBase` class.
 - Add `Structure`, `MlpStructure` entities.

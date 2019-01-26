@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'mlp_structure.dart';
+part of 'ae_structure.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MlpStructure _$MlpStructureFromJson(Map<String, dynamic> json) {
-  return MlpStructure(json['input'] as int, json['output'] as int,
+AeStructure _$AeStructureFromJson(Map<String, dynamic> json) {
+  return AeStructure(json['input'] as int, json['encoded'] as int,
       hiddens: (json['hiddens'] as List)?.map((e) => e as int)?.toList());
 }
 
-Map<String, dynamic> _$MlpStructureToJson(MlpStructure instance) =>
+Map<String, dynamic> _$AeStructureToJson(AeStructure instance) =>
     <String, dynamic>{
       'input': instance.input,
       'hiddens': instance.hiddens,
-      'output': instance.output
+      'encoded': instance.encoded
     };

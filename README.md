@@ -7,9 +7,10 @@ Created under a MIT-style
 
 This library represent an simple way to create neural network.
 
-There are 1 type of neural network that can be created:
+There are 2 types of neural network that can be created:
 
 - **MLP**(multilayer and single-layer perceptron).
+- **AE**(autoencoder).
 
 ### API
 
@@ -23,6 +24,10 @@ First layer always consist of `InputNeuron`s where each of them take one input v
 All neurons of previous layer have contacts with each neurons of next layer.
 
 In learning is used __backpropagation__ algorithm.
+
+#### AE
+
+Architecture of `AE` is the same as `MLP`, except that first is used for encoding data.
 
 #### Memory
 
@@ -45,6 +50,17 @@ Structure of *MLP*:
   "input": 15, // count of `InputNeuron`s
   "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer
   "output": 3 // count of output `Neuron`s
+}
+```
+
+Structure of *AE*:
+
+```json
+{
+  "type": "AE",
+  "input": 15, // count of `InputNeuron`s
+  "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer for encoded and decoded parts
+  "encoded": 3 // count of `Neuron`s that encode data
 }
 ```
 
@@ -85,7 +101,7 @@ void main() {
   final l3 = Layer<Neuron>(<Neuron>[
     Neuron(5)
   ]);
-  final n = MLP.withLayers(<Layer<NeuronBase>>[
+  final n = MLP(<Layer<NeuronBase>>[
     l1,
     l2,
     l3

@@ -11,6 +11,9 @@ import '../neuron/neuron.dart';
 
 /// Class that represent the multilayer perseptron (MLP)
 class MLP {
+  /// Create [MLP] with given [_layers]
+  MLP(this._layers);
+
   /// Create instance of [MLP] with path to network's structure specified by `structure.json` file
   ///
   /// If [path] to your `structure.json` isn't provided, it is implies that file is in `resources`
@@ -54,9 +57,6 @@ class MLP {
 
     _layers = layers;
   }
-
-  /// Create [MLP] with given [_layers]
-  MLP.withLayers(this._layers);
 
   /// Contains [_layers] of this network
   List<Layer<NeuronBase>> _layers;

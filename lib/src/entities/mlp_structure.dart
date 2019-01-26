@@ -6,7 +6,7 @@ part 'mlp_structure.g.dart';
 @JsonSerializable(nullable: false)
 class MlpStructure {
   /// Creates [MlpStructure] instance
-  MlpStructure(this.input, this.hiddens, this.output);
+  MlpStructure(this.input, this.output, {this.hiddens});
 
   /// Creates instance of [MlpStructure] from JSON
   factory MlpStructure.fromJson(Map<String, dynamic> json) =>
@@ -14,6 +14,8 @@ class MlpStructure {
 
   /// Count of input neurons
   final int input;
+
+  @JsonKey(nullable: true)
 
   /// Array that contains counts of hidden layers neurons
   final List<int> hiddens;
