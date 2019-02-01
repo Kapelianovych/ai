@@ -81,7 +81,7 @@ void main() {
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
   // This network trains
-  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000);
+  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000, visualize: true);
 
   // This network predicts result
   print('Recognize 5? - ${n.predict(num5)}');
@@ -106,7 +106,7 @@ void main(List<String> args) {
     '111100111001111'.split('').map(double.parse).toList(), // 5
   ];
 
-  ae.train(input: trainInput, learningRate: 0.14, epoch: 5000);
+  ae.train(input: trainInput, learningRate: 0.14, epoch: 5000, visualize: true);
   print(ae.encode(trainInput[0]));
 }
 ```

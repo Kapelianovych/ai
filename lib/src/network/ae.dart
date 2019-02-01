@@ -6,6 +6,7 @@ import '../layer.dart';
 import '../memory/long_memory.dart';
 import '../memory/short_memory.dart';
 import '../neuron/base/neuron_base.dart';
+import '../visualization/visualization.dart';
 
 /// Class that represent the autoencoder (AE)
 class AE {
@@ -109,7 +110,8 @@ class AE {
 
     var errors = Vector(input) - Vector(result);
 
-    // print(errors.dotProduct(errors));
+    // Executed if visualize is true
+    Visualization()?.console(errors);
 
     for (var i = _layers.length; i >= 2; i--) {
       ShortMemory().number = i;
@@ -118,12 +120,20 @@ class AE {
   }
 
   /// Train this perseptron
+  ///
+  /// If [visualize] is `true` MSE is calculated and sends to console.
   void train(
       {@required List<List<double>> input,
       @required double learningRate,
-      @required int epoch}) {
+      @required int epoch,
+      bool visualize = false}) {
     for (var i = 0; i < epoch; i++) {
       for (var j = 0; j < input.length; j++) {
+        if (visualize) {
+          // Initialize logger
+          Visualization.init(input.length);
+        }
+
         _backPropagation(input[j], learningRate);
       }
     }

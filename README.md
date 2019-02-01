@@ -64,6 +64,10 @@ Structure of *AE*:
 }
 ```
 
+#### Visualization
+
+Visualization of process of training network is available. Implemented only `Mean Squared Error` (`MSE`). If `visualise` paramenter of `train()` method is `true` then MSE sends to console.
+
 ## Sample
 
 This testing network recognize number 5 from numbers in range from 0 to 9. Also she detects distorted numbers of 5.
@@ -149,7 +153,7 @@ void main() {
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
   // This network trains
-  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000);
+  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000, visualize: true);
 
   // This network predicts result
   print('Recognize 5? - ${n.predict(num5)}');

@@ -8,6 +8,7 @@ import '../memory/short_memory.dart';
 import '../neuron/base/neuron_base.dart';
 import '../neuron/input_neuron.dart';
 import '../neuron/neuron.dart';
+import '../visualization/visualization.dart';
 
 /// Class that represent the multilayer perseptron (MLP)
 class MLP {
@@ -96,6 +97,10 @@ class MLP {
     final result = predict(input);
 
     var errors = Vector(expected) - Vector(result);
+
+    // Executed if visualize is true
+    Visualization()?.console(errors);
+
     for (var i = _layers.length; i >= 2; i--) {
       ShortMemory().number = i;
       errors = layerAt(i).propagate(errors, learningRate);
@@ -103,13 +108,21 @@ class MLP {
   }
 
   /// Train this perseptron
+  ///
+  /// If [visualize] is `true` MSE is calculated and sends to console.
   void train(
       {@required List<List<double>> input,
       @required List<List<double>> expected,
       @required double learningRate,
-      @required int epoch}) {
+      @required int epoch,
+      bool visualize = false}) {
     for (var i = 0; i < epoch; i++) {
       for (var j = 0; j < input.length; j++) {
+        if (visualize) {
+          // Initialize logger
+          Visualization.init(input.length);
+        }
+
         _backPropagation(input[j], expected[j], learningRate);
       }
     }

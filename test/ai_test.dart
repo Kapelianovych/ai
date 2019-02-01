@@ -72,7 +72,7 @@ void main() {
 
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
-  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000);
+  n.train(input: trainInput, expected: expected, learningRate: 0.1, epoch: 5000, visualize: true);
 
   print('Узнал 5? - ${n.predict(num5)}');
   for (var item in testInput) {

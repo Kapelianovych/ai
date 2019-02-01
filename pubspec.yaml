@@ -10,11 +10,11 @@ environment:
   sdk: '>=2.1.0-dev.9.4 <3.0.0'
 
 dependencies:
-  extended_math: ^0.0.16
+  extended_math: ^0.0.17
   meta: ^1.1.7
   json_annotation: ^2.0.0
 
 dev_dependencies:
   test: ^1.5.1
   json_serializable: ^2.0.1
-  build_runner: ^1.2.0
+  build_runner: ^1.0.0
