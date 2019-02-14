@@ -2,35 +2,35 @@ import 'package:ai/ai.dart';
 
 void main() {
 
-  final l1 = Layer<InputNeuron>(<InputNeuron>[
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron()
+  final l1 = Layer(<Neuron>[
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true)
   ]);
-  final l2 = Layer<Neuron>(<Neuron>[
+  final l2 = Layer(<Neuron>[
     Neuron(15),
     Neuron(15),
     Neuron(15),
     Neuron(15),
     Neuron(15)
   ]);
-  final l3 = Layer<Neuron>(<Neuron>[
+  final l3 = Layer(<Neuron>[
     Neuron(5)
   ]);
 
-  final n = MLP.fromStructure();
+  final n = MLP.from(Structure());
 
   // Expected results according to learning data (10)
   final expected = <List<double>>[

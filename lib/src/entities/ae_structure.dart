@@ -15,9 +15,8 @@ class AeStructure {
   /// Count of input neurons
   final int input;
 
-  @JsonKey(nullable: true)
-
   /// Array that contains counts of hidden layers neurons
+  @JsonKey(nullable: true)
   final List<int> hiddens;
 
   /// Count of neurons that produce encoded data
