@@ -1,4 +1,12 @@
-# 0.1.7
+# 0.1.8
+
+- Remove `InputNeuron` and `NeuronBase`.
+- Change signature of `Layer` class.
+- Add 4 properties to `Structure` class.
+- Change `MLP` and `AE` classes to set up with more properties.
+- Complement README.
+
+## 0.1.7
 
 - Add visualization (MSE) to network's training.
 

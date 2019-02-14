@@ -5,67 +5,62 @@ import '../entities/structure.dart';
 import '../layer.dart';
 import '../memory/long_memory.dart';
 import '../memory/short_memory.dart';
-import '../neuron/base/neuron_base.dart';
-import '../neuron/input_neuron.dart';
-import '../neuron/neuron.dart';
 import '../visualization/visualization.dart';
+import 'network_base.dart';
 
 /// Class that represent the multilayer perseptron (MLP)
-class MLP {
-  /// Create [MLP] with given [_layers]
-  MLP(this._layers);
+class MLP extends NetworkBase {
+  /// Create [MLP] with given [_layers] and optionally [activationFn], [momentum], [bias], [hyperparameter]
+  MLP(this._layers,
+      {String activationFn,
+      double momentum,
+      double bias,
+      double hyperparameter})
+      : super(
+            activationFn: activationFn,
+            momentum: momentum,
+            bias: bias,
+            hyperparameter: hyperparameter);
 
-  /// Create instance of [MLP] with path to network's structure specified by `structure.json` file
-  ///
-  /// If [path] to your `structure.json` isn't provided, it is implies that file is in `resources`
-  /// directory in the root of library.
-  ///
-  /// Format of `structure.json` file:
-  /// ```json
-  /// {
-  ///   "type": "MLP",
-  ///   "input": 15, // count of `InputNeuron`s
-  ///   "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer
-  ///   "output": 3 // count of output `Neuron`s
-  // }
-  /// ```
-  MLP.fromStructure([String path]) {
-    final structure = Structure(path).forMLP();
+  /// Create instance of [MLP] from given [Structure]
+  MLP.from(Structure structure)
+      : super(
+            activationFn: structure.activation,
+            momentum: structure.momentum,
+            bias: structure.bias,
+            hyperparameter: structure.hyperparameter) {
+    final mlp = structure.forMLP();
 
-    final layers = <Layer<NeuronBase>>[];
+    final layers = <Layer>[];
+    var prevLayerCount = mlp.input;
 
-    final inputLayer = <InputNeuron>[];
-    final hiddenLayers = <List<Neuron>>[];
-    final outputLayer = <Neuron>[];
+    layers.add(Layer.construct(mlp.input, 0, inputLayer: true));
 
-    for (var i = 0; i < structure.input; i++) {
-      inputLayer.add(InputNeuron());
+    if (mlp.hiddens != null && mlp.hiddens.isNotEmpty) {
+      for (var count in mlp.hiddens) {
+        layers.add(Layer.construct(count, prevLayerCount,
+            activationFn: activationFn,
+            momentum: momentum,
+            bias: bias,
+            hyperparameter: hyperparameter));
+        prevLayerCount = count;
+      }
     }
-    layers.add(Layer<InputNeuron>(inputLayer));
 
-    var prevLayerCount = inputLayer.length;
-    for (var count in structure.hiddens) {
-      final list = List<Neuron>.generate(count, (_) => Neuron(prevLayerCount));
-      hiddenLayers.add(list);
-      prevLayerCount = count;
-    }
-    layers.addAll(hiddenLayers.map((a) => Layer<Neuron>(a)));
-
-    for (var i = 0; i < structure.output; i++) {
-      outputLayer.add(Neuron(hiddenLayers[hiddenLayers.length - 1].length));
-    }
-    layers.add(Layer<Neuron>(outputLayer));
+    layers.add(Layer.construct(mlp.output, prevLayerCount,
+        activationFn: activationFn,
+        momentum: momentum,
+        bias: bias,
+        hyperparameter: hyperparameter));
 
     _layers = layers;
   }
 
   /// Contains [_layers] of this network
-  List<Layer<NeuronBase>> _layers;
+  List<Layer> _layers;
 
-  /// Gets layer at specified [position]
-  ///
-  /// [position] should be in range from 1 to end inclusively.
-  Layer<NeuronBase> layerAt(int position) => _layers[position - 1];
+  @override
+  Layer layerAt(int position) => _layers[position - 1];
 
   /// Predicts result with given [input]
   List<double> predict(List<double> input) {
@@ -110,6 +105,9 @@ class MLP {
   /// Train this perseptron
   ///
   /// If [visualize] is `true` MSE is calculated and sends to console.
+  ///
+  /// [learningRate] is a hyper-parameter that controls how much we are adjusting the weights
+  /// of our network with respect the loss gradient.
   void train(
       {@required List<List<double>> input,
       @required List<List<double>> expected,

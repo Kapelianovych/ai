@@ -16,11 +16,16 @@ class Structure {
   /// ```json
   /// {
   ///   "type": "MLP",
-  ///   "input": 15, // count of `InputNeuron`s
-  ///   "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer
-  ///   "output": 3 // count of output `Neuron`s
-  // }
+  ///   "activation": "relu",
+  ///   "input": 15,
+  ///   "hiddens": [3],
+  ///   "output": 3
+  /// }
   /// ```
+  ///
+  /// Where `type` - type of network, `activation` - activation functioan that is used in neurons,
+  /// `input` - count of `InputNeuron`s, `hiddens` - array length shows
+  /// count of hidden `Layer`s and values are count of `Neuron`s of each layer, `output` - count of output `Neuron`s.
   Structure([String path])
       : structure = jsonDecode(File(path ?? structurePath).readAsStringSync());
 
@@ -29,6 +34,18 @@ class Structure {
 
   /// Type of the network for which `structure.json` is provided
   String get type => structure['type'] as String;
+
+  /// Activation function for neurons of the notwork
+  String get activation => structure['activation'] as String;
+
+  /// The degree of momentum of the `sigmoid` and `tanh` functions
+  double get momentum => structure['momentum'] as double;
+
+  /// Bias of `step` activation function
+  double get bias => structure['bias'] as double;
+
+  /// Hyperparameter for `PReLU`, `RReLU` and `ELU` functions
+  double get hyperparameter => structure['hyperparameter'] as double;
 
   /// Gets structure for MLP
   ///

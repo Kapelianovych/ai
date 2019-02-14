@@ -5,70 +5,83 @@ import '../entities/structure.dart';
 import '../layer.dart';
 import '../memory/long_memory.dart';
 import '../memory/short_memory.dart';
-import '../neuron/base/neuron_base.dart';
 import '../visualization/visualization.dart';
+import 'network_base.dart';
 
 /// Class that represent the autoencoder (AE)
-class AE {
-  /// Create [AE] with given [_layers]
-  AE(this._layers);
+class AE extends NetworkBase {
+  /// Create [AE] with given [_layers] and optionally [activationFn], [momentum], [bias], [hyperparameter]
+  AE(this._layers,
+      {String activationFn,
+      double momentum,
+      double bias,
+      double hyperparameter})
+      : super(
+            activationFn: activationFn,
+            momentum: momentum,
+            bias: bias,
+            hyperparameter: hyperparameter);
 
-  /// Create instance of [AE] with path to network's structure specified by `structure.json` file
-  ///
-  /// If [path] to your `structure.json` isn't provided, it is implies that file is in `resources`
-  /// directory in the root of library.
-  ///
-  /// Format of `structure.json` file:
-  /// ```json
-  /// {
-  ///   "type": "AE",
-  ///   "input": 15, // count of `InputNeuron`s
-  ///   "hiddens": [3], // array length shows count of hidden `Layer`s and values are count
-  ///       // of `Neuron`s of each layer for encoded and decoded parts
-  ///   "decoded": 3 // count of decoded data `Neuron`s
-  // }
-  /// ```
-  AE.fromStructure([String path]) {
-    final structure = Structure(path).forAE();
+  /// Create instance of [AE] from given [Structure]
+  AE.from(Structure structure)
+      : super(
+            activationFn: structure.activation,
+            momentum: structure.momentum,
+            bias: structure.bias,
+            hyperparameter: structure.hyperparameter) {
+    final ae = structure.forAE();
 
-    final layers = <Layer<NeuronBase>>[];
-    var prevLayerCount = structure.input;
+    final layers = <Layer>[];
+    var prevLayerCount = ae.input;
 
-    layers
-        .add(Layer<NeuronBase>.construct(structure.input, 0, inputLayer: true));
+    layers.add(Layer.construct(ae.input, 0, inputLayer: true));
 
-    if (structure.hiddens != null && structure.hiddens.isNotEmpty) {
-      for (var count in structure.hiddens) {
-        layers.add(Layer<NeuronBase>.construct(count, prevLayerCount));
+    if (ae.hiddens != null && ae.hiddens.isNotEmpty) {
+      for (var count in ae.hiddens) {
+        layers.add(Layer.construct(count, prevLayerCount,
+            activationFn: activationFn,
+            momentum: momentum,
+            bias: bias,
+            hyperparameter: hyperparameter));
         prevLayerCount = count;
       }
     }
 
-    layers.add(Layer<NeuronBase>.construct(structure.encoded, prevLayerCount));
-    prevLayerCount = structure.encoded;
+    layers.add(Layer.construct(ae.encoded, prevLayerCount,
+        activationFn: activationFn,
+        momentum: momentum,
+        bias: bias,
+        hyperparameter: hyperparameter));
+    prevLayerCount = ae.encoded;
 
-    if (structure.hiddens != null && structure.hiddens.isNotEmpty) {
-      for (var count in structure.hiddens.reversed.toList()) {
-        layers.add(Layer<NeuronBase>.construct(count, prevLayerCount));
+    if (ae.hiddens != null && ae.hiddens.isNotEmpty) {
+      for (var count in ae.hiddens.reversed.toList()) {
+        layers.add(Layer.construct(count, prevLayerCount,
+            activationFn: activationFn,
+            momentum: momentum,
+            bias: bias,
+            hyperparameter: hyperparameter));
         prevLayerCount = count;
       }
     }
 
-    layers.add(Layer<NeuronBase>.construct(structure.input, prevLayerCount));
+    layers.add(Layer.construct(ae.input, prevLayerCount,
+        activationFn: activationFn,
+        momentum: momentum,
+        bias: bias,
+        hyperparameter: hyperparameter));
 
     _layers = layers;
   }
 
   /// Contains [_layers] of this network
-  List<Layer<NeuronBase>> _layers;
+  List<Layer> _layers;
 
   /// Encoded input data
   List<double> _encodedData;
 
-  /// Gets layer at specified [position]
-  ///
-  /// [position] should be in range from 1 to end inclusively.
-  Layer<NeuronBase> layerAt(int position) => _layers[position - 1];
+  @override
+  Layer layerAt(int position) => _layers[position - 1];
 
   /// Predicts encoded data with given [input]
   List<double> _predict(List<double> input) {

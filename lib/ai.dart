@@ -18,6 +18,10 @@
 /// For next time network take knowledge from file and initialize with proper weights.
 library ai;
 
+export 'src/entities/ae_structure.dart';
+export 'src/entities/mlp_structure.dart';
+export 'src/entities/structure.dart';
+
 export 'src/layer.dart';
 
 export 'src/memory/long_memory.dart';
@@ -26,6 +30,4 @@ export 'src/memory/short_memory.dart';
 export 'src/network/ae.dart';
 export 'src/network/mlp.dart';
 
-export 'src/neuron/base/neuron_base.dart';
-export 'src/neuron/input_neuron.dart';
-export 'src/neuron/neuron.dart';
+export 'src/neuron.dart';

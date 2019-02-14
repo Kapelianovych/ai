@@ -20,7 +20,7 @@ Perseptron is designed due to Rosenblatt's perseptron.
 
 The main class is the `MLP` which can contains `Layers`.
 Each layer consist of one or many `Neuron`s.
-First layer always consist of `InputNeuron`s where each of them take one input value and have weight equal to 1.
+First layer always must consist of input neurons where each of them take one input value and have weight equal to 1.
 All neurons of previous layer have contacts with each neurons of next layer.
 
 In learning is used __backpropagation__ algorithm.
@@ -40,29 +40,59 @@ For next time network take knowledge from file and initialize with proper weight
 #### Structure
 
 Neural network can be created from predefined structure difined in `structure.json` file. You can place it anywhere you want, but default and preffered way is placing it in `resources` directory in the root of your library.
-Every `structure.json` must have `type` property that corresspond to neural network's names.
+
+Every `structure.json` must have `type` property that corresspond to neural network's name.
+Other properties such as:
+
+    - activation: specifies which function are used for neuron activation (default sigmoid)
+    - momentum: describe step of gradient descent (default 1)
+    - bias: is limit of neuron's choice. Used only in `step` function
+    - hyperparameter: is used in `PReLU`, `RReLU` and `ELU`. For `RReLU` it is a random number sampled from a uniform distribution `𝑈(𝑙, u)`, for `PReLU` it is a random value and for `ELU` it is random value that is equal or greater than zero
+
+are optional. Specific properties for each structure type should be provided, except there are optional ones.
 
 Structure of *MLP*:
 
 ```json
 {
   "type": "MLP",
-  "input": 15, // count of `InputNeuron`s
-  "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer
-  "output": 3 // count of output `Neuron`s
+  "activation": "relu",
+  "input": 15,
+  "hiddens": [3],
+  "output": 3
 }
 ```
+
+Where `input` - count of input neurons, `hiddens` - array length shows
+count of hidden `Layer`s and values are count of `Neuron`s of each layer, `output` - count of output `Neuron`s.
 
 Structure of *AE*:
 
 ```json
 {
   "type": "AE",
-  "input": 15, // count of `InputNeuron`s
-  "hiddens": [3], // array length shows count of hidden `Layer`s and values are count of `Neuron`s of each layer for encoded and decoded parts
-  "encoded": 3 // count of `Neuron`s that encode data
+  "input": 15,
+  "hiddens": [3],
+  "encoded": 3
 }
 ```
+
+Where `input` - count of input neurons, `hiddens` - array length shows count of hidden `Layer`s and values are count
+of `Neuron`s of each layer for encoded and decoded parts, `decoded` - count of decoded data `Neuron`s.
+
+#### Activation functions
+
+Supported 9 activation functions:
+
+    1. step
+    2. sigmoid (default)
+    3. tanh
+    4. relu
+    5. srelu (smooth relu or softplus)
+    6. lrelu (leaky relu)
+    7. prelu (parametric relu)
+    8. rrelu (randomized relu)
+    9. elu (exponential linear units)
 
 #### Visualization
 
@@ -78,38 +108,36 @@ This testing network recognize number 5 from numbers in range from 0 to 9. Also 
 import 'package:ai/ai.dart';
 
 void main() {
-  final l1 = Layer<InputNeuron>(<InputNeuron>[
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron(),
-    InputNeuron()
+
+  final l1 = Layer(<Neuron>[
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true),
+    Neuron(0, isInput: true)
   ]);
-  final l2 = Layer<Neuron>(<Neuron>[
+  final l2 = Layer(<Neuron>[
     Neuron(15),
     Neuron(15),
     Neuron(15),
     Neuron(15),
     Neuron(15)
   ]);
-  final l3 = Layer<Neuron>(<Neuron>[
+  final l3 = Layer(<Neuron>[
     Neuron(5)
   ]);
-  final n = MLP(<Layer<NeuronBase>>[
-    l1,
-    l2,
-    l3
-  ]);
+
+  final n = MLP.from(Structure());
 
   // Expected results according to learning data (10)
   final expected = <List<double>>[
@@ -125,7 +153,7 @@ void main() {
     <double>[0.01]
   ];
 
-  // Learning data (10)
+  // Цифры (Обучающая выборка)
   final trainInput = <List<double>>[
     '111101101101111'.split('').map(double.parse).toList(),
     '001001001001001'.split('').map(double.parse).toList(),
@@ -139,7 +167,7 @@ void main() {
     '111101111001111'.split('').map(double.parse).toList()
   ];
 
-  // Testing data
+  // Виды цифры 5 (Тестовая выборка)
   final testInput = <List<double>>[
     '111100111000111'.split('').map(double.parse).toList(),
     '111100010001111'.split('').map(double.parse).toList(),
@@ -149,20 +177,18 @@ void main() {
     '111100101001111'.split('').map(double.parse).toList()
   ];
 
-  // Number which this network must recognize
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
-  // This network trains
-  n.train(input: trainInput, expected: expected, learningRate: 0.42, epoch: 5000, visualize: true);
+  n.train(input: trainInput, expected: expected, learningRate: 0.1, epoch: 5000, visualize: true);
 
-  // This network predicts result
-  print('Recognize 5? - ${n.predict(num5)}');
+  print('Узнал 5? - ${n.predict(num5)}');
   for (var item in testInput) {
-    print('Recognize distorted 5? - ${n.predict(item)[0]}');
+    print('Узнал искаженную 5? - ${n.predict(item)[0]}');
   }
-  print('Аnd 0? - ${n.predict(trainInput[0])}');
-  print('Аnd 8? - ${n.predict(trainInput[8])}');
-  print('Аnd 3? - ${n.predict(trainInput[3])}');
+  print('А 0? - ${n.predict(trainInput[0])}');
+  print('А 8? - ${n.predict(trainInput[8])}');
+  print('А 3? - ${n.predict(trainInput[3])}');
+
 }
 ```
 
