@@ -1,5 +1,9 @@
 # Examples
 
+This testing network recognize number 5 from numbers in range from 0 to 9. Also she detects distorted numbers of 5.
+
+![Numbers](../assets/images/5.png)
+
 ## MLP
 
 ```dart
@@ -51,7 +55,7 @@ void main() {
     <double>[0.01]
   ];
 
-  // Цифры (Обучающая выборка)
+  // Digits (Learning set)
   final trainInput = <List<double>>[
     '111101101101111'.split('').map(double.parse).toList(),
     '001001001001001'.split('').map(double.parse).toList(),
@@ -65,7 +69,7 @@ void main() {
     '111101111001111'.split('').map(double.parse).toList()
   ];
 
-  // Виды цифры 5 (Тестовая выборка)
+  // Digits 5 (Test set)
   final testInput = <List<double>>[
     '111100111000111'.split('').map(double.parse).toList(),
     '111100010001111'.split('').map(double.parse).toList(),
@@ -79,13 +83,13 @@ void main() {
 
   n.train(input: trainInput, expected: expected, learningRate: 0.1, epoch: 5000, visualize: true);
 
-  print('Узнал 5? - ${n.predict(num5)}');
+  print('Recognize 5? - ${n.predict(num5)}');
   for (var item in testInput) {
-    print('Узнал искаженную 5? - ${n.predict(item)[0]}');
+    print('Recognize distorted 5? - ${n.predict(item)[0]}');
   }
-  print('А 0? - ${n.predict(trainInput[0])}');
-  print('А 8? - ${n.predict(trainInput[8])}');
-  print('А 3? - ${n.predict(trainInput[3])}');
+  print('Аnd 0? - ${n.predict(trainInput[0])}');
+  print('Аnd 8? - ${n.predict(trainInput[8])}');
+  print('Аnd 3? - ${n.predict(trainInput[3])}');
 
 }
 ```
