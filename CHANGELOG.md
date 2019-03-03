@@ -1,4 +1,8 @@
-# 0.1.8
+# 0.1.8+1
+
+- Fix problems related to upgrade of `extended_math` package.
+
+## 0.1.8
 
 - Remove `InputNeuron` and `NeuronBase`.
 - Change signature of `Layer` class.

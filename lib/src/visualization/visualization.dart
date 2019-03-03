@@ -20,7 +20,7 @@ class Visualization {
   /// Calculates MSE and send error to terminal
   void console(Vector errors) {
     if (_storage.length == _dataLength) {
-      final mean = Mean(Matrix(_storage));
+      final mean = CentralTendency(Matrix(_storage));
       print('Error - ${Double(mean.quadratic()).preciseTo(4)}');
       _storage.clear();
     } else {

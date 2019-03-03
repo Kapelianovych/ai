@@ -97,7 +97,7 @@ class Neuron {
   }
 
   /// Gets weighted sum
-  double get _net => Vector(inputs).dotProduct(Vector(weights));
+  double get _net => Vector(inputs).dot(Vector(weights));
 
   /// Activation function of neuron
   double _activate() {
