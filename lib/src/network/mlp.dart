@@ -10,7 +10,8 @@ import 'network_base.dart';
 
 /// Class that represent the multilayer perseptron (MLP)
 class MLP extends NetworkBase {
-  /// Create [MLP] with given [_layers] and optionally [activationFn], [momentum], [bias], [hyperparameter]
+  /// Create [MLP] with given [_layers] and optionally [activationFn], 
+  /// [momentum], [bias], [hyperparameter]
   MLP(this._layers,
       {String activationFn,
       double momentum,
@@ -106,8 +107,8 @@ class MLP extends NetworkBase {
   ///
   /// If [visualize] is `true` MSE is calculated and sends to console.
   ///
-  /// [learningRate] is a hyper-parameter that controls how much we are adjusting the weights
-  /// of our network with respect the loss gradient.
+  /// [learningRate] is a hyper-parameter that controls how much we 
+  /// are adjusting the weights of our network with respect the loss gradient.
   void train(
       {@required List<List<double>> input,
       @required List<List<double>> expected,

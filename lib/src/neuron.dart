@@ -6,7 +6,8 @@ import 'package:extended_math/extended_math.dart';
 class Neuron {
   /// Create [Neuron] with specified [inputs] data
   ///
-  /// [connects] tells which number of neurons of the upper layer is associated with this neuron.
+  /// [connects] tells which number of neurons of the upper layer is 
+  /// associated with this neuron.
   /// [activationFn] specifies which function are used for activation:
   ///
   ///     1. step
@@ -25,12 +26,15 @@ class Neuron {
   ///
   /// [bias] is limit of neuron's choice. Used only in `step` function.
   ///
-  /// [hyperparameter] used in `PReLU`, `RReLU` and `ELU`. For `RReLU` it is a random number
-  /// sampled from a uniform distribution `𝑈(𝑙, u)`, for `PReLU` it is a random value and for
-  /// `ELU` it is random value that is equal or greater than zero.
+  /// [hyperparameter] used in `PReLU`, `RReLU` and `ELU`. 
+  /// For `RReLU` it is a random number sampled from a uniform distribution 
+  /// `𝑈(𝑙, u)`, for `PReLU` it is a random value and for `ELU` it is 
+  /// random value that is equal or greater than zero.
   ///
-  /// [isInput] flag whether this [Neuron] is input [Neuron]. If [isInput] is `true`, [connects] must have value `0`
-  /// (input neurons don't have previous layer, so don't have previous connections).
+  /// [isInput] flag whether this [Neuron] is input [Neuron]. 
+  /// If [isInput] is `true`, [connects] must have value `0`
+  /// (input neurons don't have previous layer, so don't have 
+  /// previous connections).
   Neuron(int connects,
       {this.inputs,
       double momentum,
@@ -47,7 +51,7 @@ class Neuron {
       weights != null
           ? this.weights.addAll(weights)
           : this.weights.addAll(NumbersGenerator()
-              .doubleIterableSync(this.connects, from: -limit, to: limit));
+              .doubleIterableSync(from: -limit, to: limit).take(connects));
     }
 
     _momentum = momentum ?? 1;

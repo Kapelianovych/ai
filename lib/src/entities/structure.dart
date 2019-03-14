@@ -9,7 +9,8 @@ import 'mlp_structure.dart';
 class Structure {
   /// Creates [Structure] instance
   ///
-  /// If [path] to your `structure.json` isn't provided, it is implies that file is in `resources`
+  /// If [path] to your `structure.json` isn't provided, it is 
+  /// implies that file is in `resources`
   /// directory in the root of library.
   ///
   /// Format of `structure.json` file:
@@ -23,9 +24,11 @@ class Structure {
   /// }
   /// ```
   ///
-  /// Where `type` - type of network, `activation` - activation functioan that is used in neurons,
+  /// Where `type` - type of network, `activation` - activation 
+  /// functioan that is used in neurons,
   /// `input` - count of `InputNeuron`s, `hiddens` - array length shows
-  /// count of hidden `Layer`s and values are count of `Neuron`s of each layer, `output` - count of output `Neuron`s.
+  /// count of hidden `Layer`s and values are count of `Neuron`s of 
+  /// each layer, `output` - count of output `Neuron`s.
   Structure([String path])
       : structure = jsonDecode(File(path ?? structurePath).readAsStringSync());
 

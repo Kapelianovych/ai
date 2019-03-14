@@ -1,4 +1,9 @@
-# 0.1.8+1
+# 0.1.9
+
+- Small fixes in classes.
+- Fix problems related to upgrade of `extended_math` package.
+
+## 0.1.8+1
 
 - Fix problems related to upgrade of `extended_math` package.
 

@@ -21,8 +21,9 @@ class Layer {
   ///
   /// [bias] is limit of neuron's choice. Used only in `step` function.
   ///
-  /// [hyperparameter] used in `PReLU`, `RReLU` and `ELU`. For `RReLU` it is a random number
-  /// sampled from a uniform distribution `𝑈(𝑙, u)`, for `PReLU` it is a random value and for
+  /// [hyperparameter] used in `PReLU`, `RReLU` and `ELU`. For `RReLU`
+  /// it is a random number sampled from a uniform distribution 
+  /// `𝑈(𝑙, u)`, for `PReLU` it is a random value and for
   /// `ELU` it is random value that is equal or greater than zero.
   factory Layer.construct(int count, int connects,
       {bool inputLayer = false,
@@ -84,7 +85,8 @@ class Layer {
 
   /// Accept [input] and pass it to [_neurons]
   ///
-  /// If [inputLayer] is true, values of [input] are set to corresponding _neurons,
+  /// If [inputLayer] is true, values of [input] are set to 
+  /// corresponding _neurons,
   /// otherwise all _neurons gets the same whole [input].
   void accept(List<double> input, {bool inputLayer = false}) {
     if (inputLayer) {
@@ -92,13 +94,14 @@ class Layer {
         neuronAt(i).inputs = <double>[input[i - 1]];
       }
     } else {
-      for (var neuron in _neurons) {
+      for (final neuron in _neurons) {
         neuron.inputs = input;
       }
     }
   }
 
-  /// Correct weights of _neurons according to [errors] and returns new errors for previous layer
+  /// Correct weights of _neurons according to [errors] and returns 
+  /// new errors for previous layer
   Vector propagate(Vector errors, double learningRate) {
     final partialErrors = <Vector>[];
     final layerData = <List<double>>[];

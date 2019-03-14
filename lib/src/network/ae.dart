@@ -10,7 +10,8 @@ import 'network_base.dart';
 
 /// Class that represent the autoencoder (AE)
 class AE extends NetworkBase {
-  /// Create [AE] with given [_layers] and optionally [activationFn], [momentum], [bias], [hyperparameter]
+  /// Create [AE] with given [_layers] and optionally [activationFn], 
+  /// [momentum], [bias], [hyperparameter]
   AE(this._layers,
       {String activationFn,
       double momentum,
