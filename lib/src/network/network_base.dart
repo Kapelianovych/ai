@@ -22,8 +22,8 @@ abstract class NetworkBase {
   ///
   /// [bias] is limit of neuron's choice. Used only in `step` function.
   ///
-  /// [hyperparameter] is used in `PReLU`, `RReLU` and `ELU`. For 
-  /// `RReLU` it is a random number sampled from a uniform distribution 
+  /// [hyperparameter] is used in `PReLU`, `RReLU` and `ELU`. For
+  /// `RReLU` it is a random number sampled from a uniform distribution
   /// `𝑈(𝑙, u)`, for `PReLU` it is a random value and for
   /// `ELU` it is random value that is equal or greater than zero.
   NetworkBase(
