@@ -1,4 +1,9 @@
-# 0.1.9
+# 0.1.10
+
+- Add `resources` directory with `structure.json` file (for example).
+- Fix typos in README.
+
+## 0.1.9
 
 - Small fixes in classes.
 - Fix problems related to upgrade of `extended_math` package.

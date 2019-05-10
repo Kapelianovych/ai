@@ -1,0 +1,6 @@
+{
+  "type": "MLP",
+  "input": 15,
+  "hiddens": [5],
+  "output": 1
+}

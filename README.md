@@ -32,16 +32,16 @@ Architecture of `AE` is the same as `MLP`, except that first is used for encodin
 #### Memory
 
 Neural network have long-time and short-time memory.
-All information (knowledge - weights of synapces) of neural network during studying pass through short-time memory.
+All information (knowledge - weights of synapses) of neural network during studying pass through short-time memory.
 When studying finished and knowledge is structured, then it pass to long-time memory.
 Knowledge is saved in JSON file `knowledge.json` in `resources` directory in the root of your library.
 For next time network take knowledge from file and initialize with proper weights.
 
 #### Structure
 
-Neural network can be created from predefined structure difined in `structure.json` file. You can place it anywhere you want, but default and preffered way is placing it in `resources` directory in the root of your library.
+Neural network can be created from predefined structure defined in `structure.json` file. You can place it anywhere you want, but default and preferred way is placing it in `resources` directory in the root of your library.
 
-Every `structure.json` must have `type` property that corresspond to neural network's name.
+Every `structure.json` must have `type` property that correspond to neural network's name.
 Other properties such as:
 
     - activation: specifies which function are used for neuron activation (default sigmoid)
@@ -96,7 +96,7 @@ Supported 9 activation functions:
 
 #### Visualization
 
-Visualization of process of training network is available. Implemented only `Mean Squared Error` (`MSE`). If `visualise` paramenter of `train()` method is `true` then MSE sends to console.
+Visualization of process of training network is available. Implemented only `Mean Squared Error` (`MSE`). If `visualize` parameter of `train()` method is `true` then MSE sends to console.
 
 ## Sample
 

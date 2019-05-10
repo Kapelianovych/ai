@@ -1,7 +1,6 @@
 name: ai
-description: Library that help construct neural networks (AI) with Dart. 
-  Each type of network is one object and designed as close as possible to human brain.
-version: 0.1.9
+description: Library that help construct neural networks (AI) with Dart.
+version: 0.1.10
 homepage: https://github.com/YevhenKap/ai
 author: Kapelianovych Yevhen <kapelianovych.y.v@gmail.com>
 license: MIT
@@ -11,7 +10,7 @@ environment:
 
 dependencies:
   extended_math: ^0.0.26
-  meta: ^1.1.7
+  meta: ^1.1.6
   json_annotation: ^2.0.0
   image: ^2.0.7
 

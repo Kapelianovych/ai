@@ -10,35 +10,6 @@ This testing network recognize number 5 from numbers in range from 0 to 9. Also 
 import 'package:ai/ai.dart';
 
 void main() {
-  
-  final l1 = Layer(<Neuron>[
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true),
-    Neuron(0, isInput: true)
-  ]);
-  final l2 = Layer(<Neuron>[
-    Neuron(15),
-    Neuron(15),
-    Neuron(15),
-    Neuron(15),
-    Neuron(15)
-  ]);
-  final l3 = Layer(<Neuron>[
-    Neuron(5)
-  ]);
-
   final n = MLP.from(Structure());
 
   // Expected results according to learning data (10)

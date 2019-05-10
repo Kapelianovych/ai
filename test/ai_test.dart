@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:ai/ai.dart';
 
 void main() {
-
   final n = MLP.from(Structure());
 
   // Expected results according to learning data (10)
@@ -46,7 +43,13 @@ void main() {
 
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
-  n.train(input: trainInput, expected: expected, learningRate: 0.1, epoch: 5000, visualize: true);
+  n.train(
+    input: trainInput,
+    expected: expected,
+    learningRate: 0.04,
+    epoch: 5000,
+    visualize: true
+  );
 
   print('Recognize 5? - ${n.predict(num5)}');
   for (var item in testInput) {
