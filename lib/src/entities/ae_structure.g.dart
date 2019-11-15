@@ -8,7 +8,8 @@ part of 'ae_structure.dart';
 
 AeStructure _$AeStructureFromJson(Map<String, dynamic> json) {
   return AeStructure(json['input'] as int, json['encoded'] as int,
-      hiddens: (json['hiddens'] as List)?.map((e) => e as int)?.toList());
+      hiddens:
+          (json['hiddens'] as List)?.map((dynamic e) => e as int)?.toList());
 }
 
 Map<String, dynamic> _$AeStructureToJson(AeStructure instance) =>
