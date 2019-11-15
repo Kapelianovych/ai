@@ -38,7 +38,7 @@ class AE extends NetworkBase {
     layers.add(Layer.construct(ae.input, 0, inputLayer: true));
 
     if (ae.hiddens != null && ae.hiddens.isNotEmpty) {
-      for (var count in ae.hiddens) {
+      for (final count in ae.hiddens) {
         layers.add(Layer.construct(count, prevLayerCount,
             activationFn: activationFn,
             momentum: momentum,
@@ -56,7 +56,7 @@ class AE extends NetworkBase {
     prevLayerCount = ae.encoded;
 
     if (ae.hiddens != null && ae.hiddens.isNotEmpty) {
-      for (var count in ae.hiddens.reversed.toList()) {
+      for (final count in ae.hiddens.reversed.toList()) {
         layers.add(Layer.construct(count, prevLayerCount,
             activationFn: activationFn,
             momentum: momentum,

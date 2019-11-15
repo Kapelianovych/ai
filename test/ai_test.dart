@@ -44,19 +44,17 @@ void main() {
   final num5 = '111100111001111'.split('').map(double.parse).toList();
 
   n.train(
-    input: trainInput,
-    expected: expected,
-    learningRate: 0.04,
-    epoch: 5000,
-    visualize: true
-  );
+      input: trainInput,
+      expected: expected,
+      learningRate: 0.04,
+      epoch: 5000,
+      visualize: true);
 
   print('Recognize 5? - ${n.predict(num5)}');
-  for (var item in testInput) {
+  for (final item in testInput) {
     print('Recognize distorted 5? - ${n.predict(item)[0]}');
   }
   print('Аnd 0? - ${n.predict(trainInput[0])}');
   print('Аnd 8? - ${n.predict(trainInput[8])}');
   print('Аnd 3? - ${n.predict(trainInput[3])}');
-
 }

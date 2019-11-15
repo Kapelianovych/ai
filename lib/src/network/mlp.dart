@@ -38,7 +38,7 @@ class MLP extends NetworkBase {
     layers.add(Layer.construct(mlp.input, 0, inputLayer: true));
 
     if (mlp.hiddens != null && mlp.hiddens.isNotEmpty) {
-      for (var count in mlp.hiddens) {
+      for (final count in mlp.hiddens) {
         layers.add(Layer.construct(count, prevLayerCount,
             activationFn: activationFn,
             momentum: momentum,
