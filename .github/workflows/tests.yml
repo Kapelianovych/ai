@@ -1,0 +1,15 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+
+  package-analysis:
+
+    name: Package analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: axel-op/dart_package_analyzer@stable
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
