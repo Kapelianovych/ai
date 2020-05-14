@@ -17,7 +17,7 @@ class CNN {
 
   File createImageFromConvolutionMatrix(Image originalImage, Matrix imageRGB) {
     final newImage = Image.fromBytes(originalImage.width, originalImage.height,
-        imageRGB.toList().map((v) => v.toInt()).toList(), Image.RGB);
+        imageRGB.toList().map((v) => v.toInt()).toList(), format: Format.rgb);
     final file = File('assets/new-image.png')
       ..writeAsBytesSync(newImage.getBytes());
     return file;
